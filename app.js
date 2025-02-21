@@ -480,3 +480,107 @@ setGameNames();
 changeName();
 updateTheme();
 glowingTitle();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const games = document.querySelectorAll(".games-container .game");
+
+  searchInput.addEventListener("input", function () {
+      const query = searchInput.value.toLowerCase();
+
+      games.forEach(game => {
+          const gameText = game.textContent.toLowerCase();
+          if (gameText.includes(query)) {
+              game.style.display = "block";
+          } else {
+              game.style.display = "none";
+          }
+      });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const config = {
+      particleCount: 50,  // Number of particles on screen
+      minSize: 4,         // Minimum size of particles
+      maxSize: 10,        // Maximum size of particles
+      minSpeed: 3,        // Minimum animation speed (seconds)
+      maxSpeed: 7,        // Maximum animation speed (seconds)
+      color1: "cyan",     // Primary glow color
+      color2: "magenta",  // Secondary glow color
+      opacity: 0.8        // Opacity of particles
+  };
+
+  const particlesContainer = document.createElement("div");
+  particlesContainer.classList.add("particles-container");
+  document.body.appendChild(particlesContainer);
+
+  function createParticle() {
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
+
+      const size = Math.random() * (config.maxSize - config.minSize) + config.minSize;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+
+      particle.style.animationDuration = `${Math.random() * (config.maxSpeed - config.minSpeed) + config.minSpeed}s`;
+      particle.style.backgroundColor = Math.random() > 0.5 ? config.color1 : config.color2;
+      particle.style.opacity = config.opacity;
+      particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}, 0 0 20px ${particle.style.backgroundColor}`;
+
+      particlesContainer.appendChild(particle);
+
+      setTimeout(() => {
+          particle.remove();
+      }, config.maxSpeed * 1000);
+  }
+
+  function generateParticles() {
+      for (let i = 0; i < config.particleCount; i++) {
+          createParticle();
+      }
+      setInterval(createParticle, 300);  // Generate new particles over time
+  }
+
+  generateParticles();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const particlesContainer = document.createElement("div");
+  particlesContainer.classList.add("particles-container");
+  document.body.appendChild(particlesContainer);
+
+  function createParticle() {
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
+
+      const size = Math.random() * 6 + 4; // Size between 4px and 10px
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+
+      particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+
+      // Random color for particles
+      const colors = ["cyan", "magenta", "yellow"];
+      particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}, 0 0 20px ${particle.style.backgroundColor}`;
+
+      particlesContainer.appendChild(particle);
+
+      setTimeout(() => {
+          particle.remove();
+      }, 8000);
+  }
+
+  function generateParticles() {
+      setInterval(createParticle, 200);
+  }
+
+  generateParticles();
+});
