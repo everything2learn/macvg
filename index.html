@@ -50,6 +50,7 @@
     <div class="wrap" id="wrap">
       <header class="homeheader">
         <div class="title" name="Welcome to MacVG!">Welcome to Nooh's Game Hub!</div>
+        <p>Click "p" while a teacher is looking, and escape trouble!</p>
         <div class="sub">
           <b
             style="
@@ -1516,6 +1517,12 @@ gsap.from(".game", {
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
+         <script>
+            document.addEventListener("keydown", function(event) {
+                if (event.key.toLowerCase() === "p") {
+                    window.location.href = "https://issaquah.instructure.com/login/canvas"; // Change URL as needed
+                }
+            });
+        </script>
   </body>
 </html>
